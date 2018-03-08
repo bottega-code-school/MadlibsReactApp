@@ -4,6 +4,28 @@ import {
     Row,
     Card
 } from 'reactstrap';
+import _ from 'lodash';
+
+function MadlibInput(props) {
+    return (
+        <Col md="3" className="input-wrapper">
+            <Row>
+                <Col md="2">
+                    <label className="green-label">{props.index}</label>
+                </Col>
+                <Col md="10">
+                    <input placeholder={props.placeholder} value={props.state} type='text' onChange={props.onChange} />
+                </Col>
+            </Row>
+            <Row>
+                <Col md="2"></Col>
+                <Col md="10">
+                    <div className="input-description">{props.placeholder}</div>
+                </Col>
+            </Row>
+        </Col>
+    );
+}
 
 class MadlibForm extends Component {
 
@@ -14,7 +36,12 @@ class MadlibForm extends Component {
             color: '',
             pluralNoun: '',
             adjectiveOne: '',
-            celebrityOne: ''
+            celebrityOne: '',
+            adjectiveTwo: '',
+            nounOne: '',
+            numberOne: '',
+            numberTwo: '',
+
         }
 
     }
@@ -28,74 +55,29 @@ class MadlibForm extends Component {
     }
 
     render() {
+
+        this.inputData = [
+            {placeholder: 'Color', prop: 'color', state: this.state.color},
+            {placeholder: 'Noun (Plural)', prop: 'pluralNoun', state: this.state.pluralNoun},
+            {placeholder: 'Adjective', prop: 'adjectiveOne', state: this.state.adjectiveOne},
+            {placeholder: 'Celebrity', prop: 'celebrityOne', state: this.state.celebrityOne},
+
+            {placeholder: 'Adjective', prop: 'adjectiveTwo', state: this.state.adjectiveTwo},
+            {placeholder: 'Noun', prop: 'nounOne', state: this.state.nounOne},
+            {placeholder: 'Number', prop: 'numberOne', state: this.state.numberOne},
+            {placeholder: 'Number', prop: 'numberTwo', state: this.state.numberTwo},
+
+        ]
+
       return (
           <div className="card-wrapper">
             <Card>
                 <Row style={{textAlign: 'center', color: 'white'}}>
-                    <Col md="3" className="input-wrapper">
-                        <Row>
-                            <Col md="2">
-                                <label className="green-label">1</label>
-                            </Col>
-                            <Col md="10">
-                                <input placeholder='Color' type='text' onChange={this.handleChange({inputTitle: 'color'})} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md="2"></Col>
-                            <Col md="10">
-                                <div className="input-description">Color</div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col md="3" className="input-wrapper">
-                        <Row>
-                            <Col md="2">
-                                <label className="green-label">1</label>
-                            </Col>
-                            <Col md="10">
-                                <input placeholder='Noun (Plural)' type='text' onChange={this.handleChange({inputTitle: 'pluralNoun'})} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md="2"></Col>
-                            <Col md="10">
-                                <div className="input-description">Noun (Plural)</div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col md="3" className="input-wrapper">
-                        <Row>
-                            <Col md="2">
-                                <label className="green-label">1</label>
-                            </Col>
-                            <Col md="10">
-                                <input placeholder='Adjective' type='text' onChange={this.handleChange({inputTitle: 'adjectiveOne'})} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md="2"></Col>
-                            <Col md="10">
-                                <div className="input-description">Adjective</div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col md="3" className="input-wrapper">
-                        <Row>
-                            <Col md="2">
-                                <label className="green-label">1</label>
-                            </Col>
-                            <Col md="10">
-                                <input placeholder='Celebrity' type='text' onChange={this.handleChange({inputTitle: 'celebrityOne'})} />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md="2"></Col>
-                            <Col md="10">
-                                <div className="input-description">Celebrity</div>
-                            </Col>
-                        </Row>
-                    </Col>
+                    {
+                        _.map(this.inputData, (data, indexKey) => {
+                            return <MadlibInput key={indexKey} index={indexKey + 1} state={data.state} placeholder={data.placeholder} onChange={this.handleChange({inputTitle: data.prop})} />
+                        })
+                    }
                 </Row>
             </Card>
           </div>
