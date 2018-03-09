@@ -1,8 +1,11 @@
 
 @import 'variables';
 @import 'mixins';
-@import 'components/madlib_form';
+
 @import 'header';
+
+@import 'components/madlib_form';
+@import 'components/madlib_content';
 
 body {
     font-family: $font-primary;    
