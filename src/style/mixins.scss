@@ -1,0 +1,9 @@
+@mixin buttonStyles {
+    height: 50px;
+    width: 300px;
+    border-radius: 4px;
+    color: white !important;
+    font-size: 1.25em;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    margin-top: 42px;
+}
